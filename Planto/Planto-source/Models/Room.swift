@@ -1,12 +1,9 @@
-//
 //  Room.swift
-//  Planto
-//
-//  Created by Hajar Mudhi  on 29/05/1448 AH.
-//
+//  The rooms a plant can live in (fixed list = enum).
 
 import Foundation
-enum Room: String, CaseIterable, Identifiable {
+
+enum Room: String, CaseIterable, Identifiable, Codable {
     case bedroom = "Bedroom"
     case livingRoom = "Living Room"
     case kitchen = "Kitchen"
@@ -14,8 +11,4 @@ enum Room: String, CaseIterable, Identifiable {
     case bathroom = "Bathroom"
 
     var id: String { rawValue }
-
 }
-  
-
-
