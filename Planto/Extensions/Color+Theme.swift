@@ -34,4 +34,6 @@ extension Color {
     static let chipBackground = Color(lightHex: 0xE5E9EE, darkHex: 0x25303B)
     static let plantGreen = Color(lightHex: 0x2E8B6A, darkHex: 0x5DD3A4)
     static let buttonGreen = Color(lightHex: 0x2E7D5B, darkHex: 0x3E7D63)
+    static let sunYellow = Color(lightHex: 0xC99700, darkHex: 0xFFD60A)
+    static let waterBlue = Color(lightHex: 0x1E78D6, darkHex: 0x4DA3FF)
 }

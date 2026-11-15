@@ -6,18 +6,26 @@ import SwiftUI
 struct InfoChipView: View {
     let systemImage: String
     let text: String
+    var tint: Color = .secondary
 
     var body: some View {
-        Label(text, systemImage: systemImage)
-            .font(.caption2)
-            .foregroundStyle(.secondary)
-            .padding(.horizontal, 8)
-            .padding(.vertical, 4)
-            .background(Color.chipBackground, in: Capsule())
+        HStack(spacing: 4) {
+            Image(systemName: systemImage)
+            Text(text)
+        }
+        .font(.caption2)
+        .foregroundStyle(tint)
+        .padding(.horizontal, 8)
+        .padding(.vertical, 4)
+        .background(tint.opacity(0.15), in: Capsule())
     }
 }
 
 #Preview {
-    InfoChipView(systemImage: "drop", text: "20-50 ml")
-        .padding()
+    HStack {
+        InfoChipView(systemImage: "sun.max", text: "Full sun", tint: Color.sunYellow)
+        InfoChipView(systemImage: "drop", text: "20-50 ml", tint: Color.waterBlue)
+    }
+    .padding()
+    .preferredColorScheme(.dark)
 }

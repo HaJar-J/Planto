@@ -22,12 +22,13 @@ final class PlantListViewModel {
     @ObservationIgnored private let notifications: NotificationManager
 
     init(
-        storage: PlantStorage = PlantStorage(),
-        notifications: NotificationManager = .shared,
+        storage: PlantStorage? = nil,
+        notifications: NotificationManager? = nil,
         plants: [Plant]? = nil
     ) {
+        let storage = storage ?? PlantStorage()
         self.storage = storage
-        self.notifications = notifications
+        self.notifications = notifications ?? .shared
         self.plants = plants ?? storage.load()
     }
 

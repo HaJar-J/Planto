@@ -65,37 +65,36 @@ struct MyPlantsView: View {
     }
 
     private var plantList: some View {
-        VStack(spacing: 0) {
+        List {
             ReminderProgressView(
                 progress: viewModel.progress,
                 message: viewModel.progressMessage
             )
-            .padding(.horizontal)
-            .padding(.vertical, 12)
+            .listRowBackground(Color.clear)
+            .listRowSeparator(.hidden)
+            .listRowInsets(EdgeInsets(top: 4, leading: 20, bottom: 12, trailing: 20))
 
-            List {
-                ForEach(viewModel.todayPlants) { plant in
-                    PlantRowView(
-                        plant: plant,
-                        isCompleted: viewModel.isCompleted(plant),
-                        onToggle: { viewModel.toggleCompletion(of: plant) }
-                    )
-                    .contentShape(Rectangle())
-                    .onTapGesture { formMode = .edit(plant) }
-                    .swipeActions(edge: .trailing) {
-                        Button(role: .destructive) {
-                            viewModel.delete(plant)
-                        } label: {
-                            Label("Delete", systemImage: "trash")
-                        }
+            ForEach(viewModel.todayPlants) { plant in
+                PlantRowView(
+                    plant: plant,
+                    isCompleted: viewModel.isCompleted(plant),
+                    onToggle: { viewModel.toggleCompletion(of: plant) }
+                )
+                .contentShape(Rectangle())
+                .onTapGesture { formMode = .edit(plant) }
+                .swipeActions(edge: .trailing) {
+                    Button(role: .destructive) {
+                        viewModel.delete(plant)
+                    } label: {
+                        Label("Delete", systemImage: "trash")
                     }
-                    .listRowBackground(Color.clear)
                 }
+                .listRowBackground(Color.clear)
             }
-            .listStyle(.plain)
-            .scrollContentBackground(.hidden)
-            .contentMargins(.bottom, 90, for: .scrollContent)
         }
+        .listStyle(.plain)
+        .scrollContentBackground(.hidden)
+        .contentMargins(.bottom, 90, for: .scrollContent)
     }
 }
 
@@ -104,6 +103,7 @@ struct MyPlantsView: View {
         storage: PlantStorage(fileName: "preview.json"),
         plants: Plant.samples
     ))
+    .preferredColorScheme(.dark)
 }
 
 #Preview("Empty") {
@@ -111,4 +111,5 @@ struct MyPlantsView: View {
         storage: PlantStorage(fileName: "preview.json"),
         plants: []
     ))
+    .preferredColorScheme(.dark)
 }
