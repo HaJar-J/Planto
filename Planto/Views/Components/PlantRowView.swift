@@ -13,7 +13,7 @@ struct PlantRowView: View {
             Button(action: onToggle) {
                 Image(systemName: isCompleted ? "checkmark.circle.fill" : "circle")
                     .font(.title2)
-                    .foregroundStyle(isCompleted ? Color.plantGreen : Color.secondary)
+                    .foregroundStyle(isCompleted ? Color.plantGreen : Color.iconGray)
             }
             .buttonStyle(.plain)
             .accessibilityLabel(isCompleted ? "Mark as not watered" : "Mark as watered")
@@ -24,16 +24,17 @@ struct PlantRowView: View {
                     Text("in \(plant.room.rawValue)")
                 }
                 .font(.caption2)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(Color.textSecondary)
 
                 Text(plant.name)
                     .font(.title3)
-                    .foregroundStyle(isCompleted ? Color.secondary : Color.primary)
+                    .foregroundStyle(isCompleted ? Color.textSecondary : Color.primary)
 
-                HStack(spacing: 8) {
+                HStack(spacing: 9) {
                     InfoChipView(systemImage: plant.light.symbolName, text: plant.light.rawValue, tint: Color.sunYellow)
                     InfoChipView(systemImage: "drop", text: plant.waterAmount.rawValue, tint: Color.waterBlue)
                 }
+                .opacity(isCompleted ? 0.68 : 1)
             }
             Spacer()
         }

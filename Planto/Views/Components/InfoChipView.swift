@@ -16,16 +16,17 @@ struct InfoChipView: View {
         .font(.caption2)
         .foregroundStyle(tint)
         .padding(.horizontal, 8)
-        .padding(.vertical, 4)
-        .background(tint.opacity(0.15), in: Capsule())
+        .padding(.vertical, 2)
+        .background(Color.chipSurface, in: RoundedRectangle(cornerRadius: 6))
     }
 }
 
 #Preview {
-    HStack {
+    HStack(spacing: 9) {
         InfoChipView(systemImage: "sun.max", text: "Full sun", tint: Color.sunYellow)
         InfoChipView(systemImage: "drop", text: "20-50 ml", tint: Color.waterBlue)
     }
     .padding()
+    .background(Color.appBackground)
     .preferredColorScheme(.dark)
 }
