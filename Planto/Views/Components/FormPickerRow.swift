@@ -12,9 +12,9 @@ struct FormPickerRow<Value: CaseIterable & Hashable & RawRepresentable>: View
     @Binding var selection: Value
 
     var body: some View {
-        HStack {
-            Label(title, systemImage: systemImage)
-                .font(.subheadline)
+        HStack(spacing: 8) {
+            Image(systemName: systemImage)
+            Text(title)
             Spacer()
             Picker(title, selection: $selection) {
                 ForEach(Array(Value.allCases), id: \.self) { option in
@@ -23,14 +23,18 @@ struct FormPickerRow<Value: CaseIterable & Hashable & RawRepresentable>: View
             }
             .labelsHidden()
             .pickerStyle(.menu)
-            .tint(.secondary)
+            .tint(Color.valueGray)
         }
-        .padding(.vertical, 4)
+        .font(.body)
+        .padding(.horizontal, 19)
+        .frame(height: 47)
     }
 }
 
 #Preview {
     @Previewable @State var room = Room.bedroom
     FormPickerRow(title: "Room", systemImage: "location", selection: $room)
+        .background(Color.cardBackground)
         .padding()
+        .preferredColorScheme(.dark)
 }

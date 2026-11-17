@@ -21,7 +21,7 @@ struct PlantFormView: View {
     }
 
     var body: some View {
-        VStack(spacing: 20) {
+        VStack(spacing: 0) {
             SheetHeaderView(
                 title: "Set Reminder",
                 canConfirm: viewModel.canSave,
@@ -31,63 +31,92 @@ struct PlantFormView: View {
                     dismiss()
                 }
             )
+            .padding(.horizontal, 27)
+            .padding(.top, 15)
 
             ScrollView {
-                VStack(spacing: 16) {
+                VStack(spacing: 50) {
                     nameField
 
                     card {
                         FormPickerRow(title: "Room", systemImage: "location", selection: $viewModel.room)
-                        Divider()
+                        rowDivider
                         FormPickerRow(title: "Light", systemImage: "sun.max", selection: $viewModel.light)
                     }
 
                     card {
                         FormPickerRow(title: "Watering Days", systemImage: "drop", selection: $viewModel.frequency)
-                        Divider()
+                        rowDivider
                         FormPickerRow(title: "Water", systemImage: "drop", selection: $viewModel.waterAmount)
                     }
 
                     if viewModel.isEditing, let onDelete {
-                        Button("Delete Reminder", role: .destructive) {
-                            onDelete()
-                            dismiss()
-                        }
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.cardBackground, in: RoundedRectangle(cornerRadius: 20))
+                        deleteButton(onDelete)
+                            .padding(.top, 20)
+                            .padding(.horizontal, 7)
                     }
                 }
+                .padding(.horizontal, 17)
+                .padding(.top, 59)
             }
         }
-        .padding()
-        .background(Color.appBackground.ignoresSafeArea())
+        .background(Color.sheetBackground.ignoresSafeArea())
+        .presentationBackground(Color.sheetBackground)
     }
 
+    // MARK: - Pieces
+
     private var nameField: some View {
-        HStack {
+        HStack(spacing: 8) {
             Text("Plant Name")
-                .font(.subheadline)
-            TextField("Pothos", text: $viewModel.name)
+            TextField(
+                "Pothos",
+                text: $viewModel.name,
+                prompt: Text("Pothos").foregroundStyle(Color.placeholderGray)
+            )
+            .tint(Color.plantGreen)
         }
-        .padding()
-        .background(Color.cardBackground, in: RoundedRectangle(cornerRadius: 20))
+        .font(.body)
+        .padding(.horizontal, 19)
+        .frame(height: 61)
+        .background(Color.cardBackground, in: Capsule())
+    }
+
+    private var rowDivider: some View {
+        Divider()
+            .overlay(Color.separatorGray)
+            .padding(.horizontal, 6)
+    }
+
+    private func deleteButton(_ action: @escaping () -> Void) -> some View {
+        Button {
+            action()
+            dismiss()
+        } label: {
+            Text("Delete Reminder")
+                .font(.body)
+                .foregroundStyle(Color.deleteRed)
+                .frame(maxWidth: .infinity)
+                .frame(height: 51)
+        }
+        .buttonStyle(.plain)
+        .background(Color.cardBackground, in: Capsule())
     }
 
     private func card<Content: View>(@ViewBuilder content: () -> Content) -> some View {
-        VStack(spacing: 4) {
+        VStack(spacing: 0) {
             content()
         }
-        .padding(.horizontal)
-        .padding(.vertical, 8)
-        .background(Color.cardBackground, in: RoundedRectangle(cornerRadius: 20))
+        .background(Color.cardBackground, in: .rect(cornerRadius: 32))
     }
 }
 
 #Preview("Add") {
     PlantFormView(onSave: { _ in })
+        .preferredColorScheme(.dark)
 }
 
 #Preview("Edit") {
     PlantFormView(plant: Plant.samples[0], onSave: { _ in }, onDelete: {})
+        .preferredColorScheme(.dark)
 }

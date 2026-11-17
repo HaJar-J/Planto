@@ -1,5 +1,5 @@
 //  FloatingAddButton.swift
-//  The round green "+" button. Uses Liquid Glass.
+//  The round green "+" button: exactly 44 x 44 pt, with Liquid Glass.
 
 import SwiftUI
 
@@ -9,13 +9,12 @@ struct FloatingAddButton: View {
     var body: some View {
         Button(action: action) {
             Image(systemName: "plus")
-                .font(.title2.weight(.semibold))
-                .frame(width: 28, height: 28)
+                .font(.system(size: 20, weight: .medium))
+                .foregroundStyle(.white)
+                .frame(width: 44, height: 44)
         }
-        .buttonStyle(.glassProminent)
-        .buttonBorderShape(.circle)
-        .controlSize(.large)
-        .tint(Color.buttonGreen)
+        .buttonStyle(.plain)
+        .glassEffect(.regular.tint(Color.buttonGreen).interactive(), in: .circle)
         .accessibilityLabel("Add plant reminder")
     }
 }
@@ -23,4 +22,5 @@ struct FloatingAddButton: View {
 #Preview {
     FloatingAddButton(action: {})
         .padding()
+        .preferredColorScheme(.dark)
 }

@@ -31,18 +31,23 @@ extension Color {
 
     // Backgrounds
     static let appBackground = Color(lightHex: 0xF2F2F7, darkHex: 0x000000)
-    static let cardBackground = Color(lightHex: 0xFFFFFF, darkHex: 0x222224)
+    static let sheetBackground = Color(lightHex: 0xF2F2F7, darkHex: 0x1C1C1E)
+    static let cardBackground = Color(lightHex: 0xFFFFFF, darkHex: 0x2C2C2E)
     static let chipBackground = Color(lightHex: 0xE5E9EE, darkHex: 0x25303B)
     static let chipSurface = Color(lightHex: 0xE8E8ED, darkHex: 0x18181D)
 
     // Accents
     static let plantGreen = Color(lightHex: 0x2E8B6A, darkHex: 0x5DD3A4)
-    static let buttonGreen = Color(lightHex: 0x2E7D5B, darkHex: 0x3E7D63)
+    static let buttonGreen = Color(lightHex: 0x2B6B58, darkHex: 0x338069)
     static let sunYellow = Color(lightHex: 0x8A7B12, darkHex: 0xCCC785)
     static let waterBlue = Color(lightHex: 0x13789A, darkHex: 0xCAF3FB)
+    static let deleteRed = Color(lightHex: 0xD93A2B, darkHex: 0xEB5545)
 
     // Grays and text (from the design file)
     static let iconGray = Color(lightHex: 0x8E8E93, darkHex: 0x979797)
+    static let valueGray = Color(lightHex: 0x8E8E93, darkHex: 0x8E8E93)
+    static let placeholderGray = Color(lightHex: 0xA0A0A5, darkHex: 0x656565)
+    static let separatorGray = Color(lightHex: 0xD1D1D6, darkHex: 0x3D3D40)
     /// White at 50% in dark mode (black at 50% in light mode).
     static let textSecondary = Color.primary.opacity(0.5)
 }

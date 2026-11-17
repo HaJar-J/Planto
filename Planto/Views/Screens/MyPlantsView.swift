@@ -29,8 +29,8 @@ struct MyPlantsView: View {
                 content
 
                 FloatingAddButton { formMode = .add }
-                    .padding(.trailing, 24)
-                    .padding(.bottom, 16)
+                    .padding(.trailing, 30)
+                    .padding(.bottom, 8)
             }
             .navigationTitle("My Plants 🌱")
             .sheet(item: $formMode) { mode in

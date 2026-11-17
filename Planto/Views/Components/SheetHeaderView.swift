@@ -1,5 +1,6 @@
 //  SheetHeaderView.swift
-//  Top bar of the sheet: ✕ cancel, title, ✓ confirm (Liquid Glass buttons).
+//  Top bar of the sheet: X cancel, title, checkmark confirm.
+//  Both buttons are 44 x 44 pt Liquid Glass circles.
 
 import SwiftUI
 
@@ -13,25 +14,31 @@ struct SheetHeaderView: View {
         HStack {
             Button(action: onCancel) {
                 Image(systemName: "xmark")
-                    .frame(width: 20, height: 20)
+                    .font(.system(size: 18, weight: .medium))
+                    .foregroundStyle(.white)
+                    .frame(width: 44, height: 44)
             }
-            .buttonStyle(.glass)
-            .buttonBorderShape(.circle)
+            .buttonStyle(.plain)
+            .glassEffect(.regular.interactive(), in: .circle)
             .accessibilityLabel("Cancel")
 
             Spacer()
+
             Text(title)
                 .font(.headline)
+
             Spacer()
 
             Button(action: onConfirm) {
                 Image(systemName: "checkmark")
-                    .frame(width: 20, height: 20)
+                    .font(.system(size: 20, weight: .medium))
+                    .foregroundStyle(.white)
+                    .frame(width: 44, height: 44)
             }
-            .buttonStyle(.glassProminent)
-            .buttonBorderShape(.circle)
-            .tint(Color.buttonGreen)
+            .buttonStyle(.plain)
+            .glassEffect(.regular.tint(Color.buttonGreen).interactive(), in: .circle)
             .disabled(!canConfirm)
+            .opacity(canConfirm ? 1 : 0.4)
             .accessibilityLabel("Save")
         }
     }
@@ -39,5 +46,8 @@ struct SheetHeaderView: View {
 
 #Preview {
     SheetHeaderView(title: "Set Reminder", canConfirm: true, onCancel: {}, onConfirm: {})
-        .padding()
+        .padding(.horizontal, 27)
+        .padding(.top, 15)
+        .background(Color.sheetBackground)
+        .preferredColorScheme(.dark)
 }

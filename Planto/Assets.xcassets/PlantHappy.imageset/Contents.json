@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "PlantHappy@1x.png",
+      "filename" : "Plant icon 1.svg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "PlantHappy@2x.png",
+      "filename" : "Plant icon 2.svg",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "PlantHappy@3x.png",
+      "filename" : "Plant icon 3.svg",
       "idiom" : "universal",
       "scale" : "3x"
     }
