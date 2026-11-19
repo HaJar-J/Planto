@@ -11,10 +11,9 @@ final class PlantListViewModel {
 
     /// Which version of the main screen to show.
     enum ScreenState {
-        case empty       // no plants at all
-        case nothingDue  // plants exist, but none are due today
-        case today       // some reminders are still open
-        case allDone     // every reminder due today is checked
+        case empty      // no plants at all
+        case today      // some reminders still open
+        case allDone    // every reminder for today is checked
     }
 
     private(set) var plants: [Plant]
@@ -35,11 +34,8 @@ final class PlantListViewModel {
 
     // MARK: - Values the View displays
 
-    /// Today's reminders: pending first, then completed.
-    /// Each group keeps its original order.
     var todayPlants: [Plant] {
-        let due = plants.filter { $0.isScheduledForToday() }
-        return due.filter { !$0.isWateredToday() } + due.filter { $0.isWateredToday() }
+        plants.filter { $0.isScheduledForToday() }
     }
 
     var completedCount: Int {
@@ -59,7 +55,6 @@ final class PlantListViewModel {
 
     var screenState: ScreenState {
         if plants.isEmpty { return .empty }
-        if todayPlants.isEmpty { return .nothingDue }
         return todayPlants.allSatisfy { $0.isWateredToday() } ? .allDone : .today
     }
 

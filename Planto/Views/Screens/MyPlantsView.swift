@@ -1,5 +1,5 @@
 //  MyPlantsView.swift
-//  The main screen. Shows one of four states: empty, nothing due, today's list, or all done.
+//  The main screen. Shows one of three states: empty, today's list, or all done.
 
 import SwiftUI
 
@@ -53,11 +53,6 @@ struct MyPlantsView: View {
         switch viewModel.screenState {
         case .empty:
             EmptyStateView(title: "No reminders set yet...")
-        case .nothingDue:
-            EmptyStateView(
-                title: "Nothing to water today",
-                message: "Your plants are all set. Check back tomorrow."
-            )
         case .today:
             plantList
         case .allDone:
@@ -83,9 +78,7 @@ struct MyPlantsView: View {
                 PlantRowView(
                     plant: plant,
                     isCompleted: viewModel.isCompleted(plant),
-                    onToggle: {
-                        withAnimation { viewModel.toggleCompletion(of: plant) }
-                    }
+                    onToggle: { viewModel.toggleCompletion(of: plant) }
                 )
                 .contentShape(Rectangle())
                 .onTapGesture { formMode = .edit(plant) }
