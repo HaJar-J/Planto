@@ -13,4 +13,4 @@ A plant-watering reminder app built with SwiftUI at the Apple Developer Academy.
 - Liquid Glass (iOS 26)
 
 ## Status
-In progress
+Done!
